@@ -48,3 +48,4 @@ Configure the required environment variables using `server/.env.example`, then s
 ## Security
 
 Do not commit `.env` files containing credentials, passwords, or API keys.
+- UI redesign: Code0 planned and applied a boutique-style restyle (sticky navbar, hero banner, product cards, detail page and login styling). Its build check passed, and I checked the pages in the browser before committing.
