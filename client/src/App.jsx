@@ -3,6 +3,7 @@ import { Routes, Route, Link, Navigate, useNavigate } from 'react-router-dom';
 import Catalog from './pages/Catalog.jsx';
 import Login from './pages/Login.jsx';
 import Admin from './pages/Admin.jsx';
+import ProductDetail from './pages/ProductDetail.jsx';
 
 export default function App() {
   const [user, setUser] = useState(() => JSON.parse(localStorage.getItem('user') || 'null'));
@@ -36,6 +37,7 @@ export default function App() {
       <main className="wrap">
         <Routes>
           <Route path="/" element={<Catalog />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
           <Route path="/login" element={<Login onLogin={onLogin} />} />
           <Route path="/admin" element={user?.role === 'admin' ? <Admin /> : <Navigate to="/login" />} />
         </Routes>

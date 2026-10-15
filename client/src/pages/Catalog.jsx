@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api, { errMsg } from '../api.js';
 
 export default function Catalog() {
@@ -51,14 +52,16 @@ export default function Catalog() {
       <div className="grid">
         {data.items.map((p) => (
           <article key={p._id} className="card">
-            <img src={p.imageUrl} alt={p.name} />
-            <div className="info">
-              <h3>{p.name}</h3>
-              <p className="muted">{p.category} - {p.color}</p>
-              <p className="price">Rs. {p.price.toLocaleString('en-IN')}</p>
-              <p className="muted small">Sizes: {p.sizes.join(', ') || '-'}</p>
-              {p.stock === 0 && <p className="error small">Out of stock</p>}
-            </div>
+            <Link to={`/product/${p._id}`} className="product-card-link">
+              <img src={p.imageUrl} alt={p.name} />
+              <div className="info">
+                <h3>{p.name}</h3>
+                <p className="muted">{p.category} - {p.color}</p>
+                <p className="price">Rs. {p.price.toLocaleString('en-IN')}</p>
+                <p className="muted small">Sizes: {p.sizes.join(', ') || '-'}</p>
+                {p.stock === 0 && <p className="error small">Out of stock</p>}
+              </div>
+            </Link>
           </article>
         ))}
       </div>
