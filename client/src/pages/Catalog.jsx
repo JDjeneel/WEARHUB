@@ -32,18 +32,44 @@ export default function Catalog() {
 
   return (
     <>
-      <h1>Clothing & accessories</h1>
-      <input
-        className="search"
-        placeholder="Search by product name"
-        value={search}
-        onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-      />
-      <div className="chips">
-        {categories.map((c) => (
-          <button key={c} className={c === category ? 'chip on' : 'chip'} onClick={() => pick(c)}>{c}</button>
-        ))}
-      </div>
+      <section className="hero">
+        <div className="hero-copy">
+          <p className="eyebrow">A little something, just for you</p>
+          <h1>Dress the way<br />you feel.</h1>
+          <p>Considered pieces for everyday moments and everything worth celebrating.</p>
+          <button
+            className="primary hero-button"
+            onClick={() => document.getElementById('collection')?.scrollIntoView({ behavior: 'smooth' })}
+          >
+            Shop the collection
+          </button>
+        </div>
+        <div className="hero-art" aria-hidden="true">
+          <span className="hero-orbit hero-orbit-one" />
+          <span className="hero-orbit hero-orbit-two" />
+          <span className="hero-mark">W</span>
+        </div>
+      </section>
+
+      <section id="collection" className="collection">
+        <div className="collection-heading">
+          <div>
+            <p className="eyebrow">Find your favorite</p>
+            <h2>Clothing & accessories</h2>
+          </div>
+          <input
+            className="search"
+            placeholder="Search by product name"
+            aria-label="Search by product name"
+            value={search}
+            onChange={(e) => { setSearch(e.target.value); setPage(1); }}
+          />
+        </div>
+        <div className="chips">
+          {categories.map((c) => (
+            <button key={c} className={c === category ? 'chip on' : 'chip'} onClick={() => pick(c)}>{c}</button>
+          ))}
+        </div>
 
       {error && <p className="error">{error}</p>}
       {loading && <p className="muted">Loading products...</p>}
@@ -53,13 +79,15 @@ export default function Catalog() {
         {data.items.map((p) => (
           <article key={p._id} className="card">
             <Link to={`/product/${p._id}`} className="product-card-link">
-              <img src={p.imageUrl} alt={p.name} />
+              <div className="product-image">
+                <img src={p.imageUrl} alt={p.name} />
+                {p.stock === 0 && <span className="stock-badge">Out of stock</span>}
+              </div>
               <div className="info">
                 <h3>{p.name}</h3>
                 <p className="muted">{p.category} - {p.color}</p>
                 <p className="price">Rs. {p.price.toLocaleString('en-IN')}</p>
                 <p className="muted small">Sizes: {p.sizes.join(', ') || '-'}</p>
-                {p.stock === 0 && <p className="error small">Out of stock</p>}
               </div>
             </Link>
           </article>
@@ -73,6 +101,7 @@ export default function Catalog() {
           <button disabled={page >= data.pages} onClick={() => setPage(page + 1)}>Next</button>
         </div>
       )}
+      </section>
     </>
   );
 }

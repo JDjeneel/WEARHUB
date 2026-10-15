@@ -42,6 +42,10 @@ export default function App() {
           <Route path="/admin" element={user?.role === 'admin' ? <Admin /> : <Navigate to="/login" />} />
         </Routes>
       </main>
+      <footer className="footer">
+        <Link to="/" className="brand">WearHub</Link>
+        <p>Thoughtful pieces for the way you feel.</p>
+      </footer>
     </>
   );
 }

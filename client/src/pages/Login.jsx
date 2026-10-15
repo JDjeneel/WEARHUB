@@ -19,13 +19,15 @@ export default function Login({ onLogin }) {
   };
 
   return (
-    <form className="panel narrow" onSubmit={submit}>
-      <h1>{mode === 'login' ? 'Log in' : 'Create account'}</h1>
+    <form className="panel narrow login-card" onSubmit={submit}>
+      <p className="eyebrow">Welcome to WearHub</p>
+      <h1>{mode === 'login' ? 'Welcome back' : 'Create your account'}</h1>
+      <p className="login-intro">A lovely wardrobe starts here.</p>
       {mode === 'register' && <input placeholder="Name" value={form.name} onChange={set('name')} required />}
       <input type="email" placeholder="Email" value={form.email} onChange={set('email')} required />
       <input type="password" placeholder="Password (6+ characters)" value={form.password} onChange={set('password')} required />
       {error && <p className="error">{error}</p>}
-      <button className="primary" type="submit">{mode === 'login' ? 'Log in' : 'Create account'}</button>
+      <button className="primary login-submit" type="submit">{mode === 'login' ? 'Log in' : 'Create account'}</button>
       <button type="button" className="link" onClick={() => setMode(mode === 'login' ? 'register' : 'login')}>
         {mode === 'login' ? 'New here? Create an account' : 'Already registered? Log in'}
       </button>
